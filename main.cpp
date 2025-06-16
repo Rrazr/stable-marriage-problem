@@ -1,31 +1,3 @@
-/** StableMarriage -- Non Recursive Version
- *  StableMarriageRecursion.cpp
- *
- *  Fall, 2011
- *
- *  Problem: Stable Marriage Problem-- Matches Men & Women after listening to their preferences
- *
- *  For More Description & Example of Problem:
- *     Check File: 'stable marriage using backtrack assignment.pdf'
- *
- *  Input Format:
- *      You can't input straight away, however, you can edit 'mp' and 'wp' arrays to change the
- *      input in different way
- *
- *  OutPut Format:
- *      This program will output the best possible men and women matches
- *
- * This program matches 3 men with 3 women in a best way possible acc. to men and women preferences
- *
- * @param mp mp: stands for Men's Preferences, holds preferences of 3 mens's
- *               For eg. in 'int mp[3][3] = {{0,2,1},{0,2,1},{1,2,0}};'
- *               First men Preferences are: 0, 2, 1        (here each of 0, 2, 1 represents a women)
- *               Third men Preferences are: 1, 2, 0
- * @param wp wp stands for Women's Preferences
- * @Compiler version on which Program is Last Run before uploading to Github: Dev-C++ 5.4.1, Date: 1st July, 2013
- * @author Gurpreet Singh
- */
-
 #include "OptionL.h"
 #include "OptionH.h"
 #include "OptionB.h"
