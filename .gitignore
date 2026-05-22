@@ -1,0 +1,18 @@
+# Prerequisites
+# Ignore build directory
+build/
+
+# Ignore compiled executables and libraries
+*.exe
+*.out
+*.app
+*.obj
+*.o
+*.pdb
+*.ilk
+
+# Ignore Visual Studio and VS Code local settings
+.vs/
+.vscode/
+bin/
+obj/
