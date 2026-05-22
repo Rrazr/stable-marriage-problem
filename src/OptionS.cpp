@@ -1,17 +1,8 @@
-//
-//  OptionS.h
-//  StableMarriageProblem
-//
-//  Created by Ryan Ong on 6/24/24.
-//
-
-#ifndef OptionS_h
-#define OptionS_h
-
-#include "NumberOfSMFunctions.h"
-#include "MatrixManipFunctions.h"
-
-int matching[n];
+#include <StableMarriage/OptionS.h>
+#include <StableMarriage/Globals.h>
+#include <StableMarriage/NumberOfSMFunctions.h>
+#include <StableMarriage/MatrixManipFunctions.h>
+#include <iostream>
 
 bool isStableMatching(){
     for (int i = 1; i < n; i ++){
@@ -30,18 +21,16 @@ bool isStableMatching(){
 
 void optionS() {
     int num;
-    cout << "Enter matchings in order:\n";
+    std::cout << "Enter matchings in order:\n";
     for (int i = 0; i < n; i ++){
-        cout << "Man " << i + 1 << "'s pair: ";
-        cin >> num;
+        std::cout << "Man " << i + 1 << "'s pair: ";
+        std::cin >> num;
         matching[i] = num - 1;
     }
     for (int i = 0; i < n; i ++){
-        cout << matching[i] << " ";
+        std::cout << matching[i] << " ";
     }
-    cout << '\n';
-    cout << (isStableMatching() ? "The given matching is stable\n" : "The given matching is unmatching\n");
-    cout << '\n' << '\n';
+    std::cout << '\n';
+    std::cout << (isStableMatching() ? "The given matching is stable\n" : "The given matching is unmatching\n");
+    std::cout << '\n' << '\n';
 }
-
-#endif /* OptionS_h */
