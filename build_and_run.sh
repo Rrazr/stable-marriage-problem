@@ -9,9 +9,8 @@ cmake -B build
 echo "Compiling..."
 cmake --build build
 
-echo ""
-echo "Running Stable Marriage Solver..."
-echo "-----------------------------------"
+# Clear the screen before running the app
+clear
 
 # Check common output paths for Mac/Linux
 if [ -f "build/StableMarriageApp" ]; then
