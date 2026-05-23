@@ -4,7 +4,6 @@
 #include <StableMarriage/OptionB.h>
 #include <StableMarriage/OptionE.h>
 #include <StableMarriage/OptionR.h>
-#include <StableMarriage/OptionS.h>
 #include <StableMarriage/OptionI.h>
 #include <StableMarriage/OptionG.h>
 #include <iostream>
@@ -16,7 +15,6 @@ int main() {
     while(1) {
         std::cout << "Choose an option below:\n";
         std::cout << "(R) Generate And Calculate Random Samples\n";
-        std::cout << "(S) Verify Matching\n";
         std::cout << "(L) Test Latin Matrix\n";
         std::cout << "(H) Hill Climbing Search\n";
         std::cout << "(B) Best First Search\n";
@@ -28,8 +26,6 @@ int main() {
         std::cout << '\n' << '\n';
         if (ch == 'R' || ch == 'r'){
             optionR();
-        }else if (ch == 'S' || ch == 's'){
-            optionS();
         }else if (ch == 'L' || ch == 'l'){
             optionL();
         }else if (ch == 'I' || ch == 'i'){
