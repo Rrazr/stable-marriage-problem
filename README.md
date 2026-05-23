@@ -5,7 +5,6 @@ A professional C++ application for generating and analyzing Stable Marriage Prob
 ## Features
 
 - **Random Sample Calculation:** Generate random preference matrices and calculate their stable matchings.
-- **Matching Verification:** Manually enter and verify if a specific matching is stable.
 - **Search Algorithms:** 
   - **Hill Climbing:** Optimize matrices to find high numbers of stable matchings.
   - **Best First Search:** Heuristic-based search for optimal matrices.
@@ -20,22 +19,11 @@ To build and run this project, you need:
 
 ## How to Build and Run
 
-### The "One-Click" Method
-- **Windows:** Double-click `build_and_run.bat`.
-- **Mac/Linux:** Run `./build_and_run.sh` in your terminal.
+Run the automated build script for your platform:
 
-### The Manual Method (Standard CMake)
-1. **Configure:**
-   ```bash
-   cmake -B build
-   ```
-2. **Build:**
-   ```bash
-   cmake --build build
-   ```
-3. **Run:**
-   - **Windows:** `.\build\Debug\StableMarriageApp.exe`
-   - **Mac/Linux:** `./build/StableMarriageApp`
+- **Windows (Command Prompt):** Double-click `build_and_run.bat` or run `build_and_run.bat` in your terminal.
+- **Windows (PowerShell):** Run `.\build_and_run.ps1` in your terminal.
+- **Mac/Linux:** Run `chmod +x build_and_run.sh` once to grant permission, then `./build_and_run.sh`.
 
 ## Project Structure
 

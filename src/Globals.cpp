@@ -16,4 +16,3 @@ std::vector<int> wRank;
 char ch;
 bool Pseudo = false;
 int latinMatrix[n][n];
-int matching[n];

@@ -9,7 +9,7 @@ struct PAIR {
 };
 
 // Constants
-// Using inline for constants to allow them to be defined in the header in C++17+
+// Requires C++ 17+
 inline const int n = 7;
 inline const int MAX_SM = 1231;
 inline const int histogramSize = 100000;
@@ -31,6 +31,5 @@ extern std::vector<int> wRank;
 extern char ch;
 extern bool Pseudo;
 extern int latinMatrix[n][n];
-extern int matching[n];
 
 #endif
