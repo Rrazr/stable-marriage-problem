@@ -12,9 +12,9 @@ void optionR() {
         randomizer();
         numberOfStableMatchings();
     }
-    std::cout << "Histogram 1:\n";
+    std::cout << "Histogram:\n";
     printHistogram();
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-    std::cout << "Time taken by function: " << duration.count() << " milliseconds" << std::endl << '\n';
+    std::cout << "Time taken by function: " << duration.count() << " ms" << std::endl << '\n';
 }

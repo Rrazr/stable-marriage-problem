@@ -88,9 +88,9 @@ void optionH(){
                     }
                 }
                 if (largest <= fattest){
-                    std::cout << 1 << '\n';
                     break;
-                }else{
+                }
+                else{
                     std::cout << "Largest: " << largest << '\n';
                     fattest = largest;
                     for (int i = 0; i < n; i ++){

@@ -7,7 +7,6 @@ A professional C++ application for generating and analyzing Stable Marriage Prob
 - **Random Sample Calculation:** Generate random preference matrices and calculate their stable matchings.
 - **Search Algorithms:** 
   - **Hill Climbing:** Optimize matrices to find high numbers of stable matchings.
-  - **Best First Search:** Heuristic-based search for optimal matrices.
 - **Specialized Matrices:** Support for Latin and Pseudo-Latin matrices.
 - **Matrix Manipulation:** Automated tools for dropping elements or increasing matrix size ($n+1$).
 
