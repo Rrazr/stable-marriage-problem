@@ -3,7 +3,6 @@
 #include <StableMarriage/OptionH.h>
 #include <StableMarriage/OptionE.h>
 #include <StableMarriage/OptionR.h>
-#include <StableMarriage/OptionI.h>
 #include <StableMarriage/OptionG.h>
 #include <iostream>
 #include <ctime>
@@ -16,7 +15,6 @@ int main() {
         std::cout << "(R) Generate And Calculate Random Samples\n";
         std::cout << "(L) Test Latin Matrix\n";
         std::cout << "(H) Hill Climbing Search\n";
-        std::cout << "(I) Input Matrix\n";
         std::cout << "(E) Extract Top Seeds\n";
         std::cout << "(G) Generate a new matrix that is n + 1\n\n";
         std::cout << "Enter choice: ";
@@ -26,8 +24,6 @@ int main() {
             optionR();
         }else if (ch == 'L' || ch == 'l'){
             optionL();
-        }else if (ch == 'I' || ch == 'i'){
-            optionI();
         }else if (ch == 'H' || ch == 'h'){
             optionH();
         }else if (ch == 'E' || ch == 'e'){
