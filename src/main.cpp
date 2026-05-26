@@ -4,7 +4,6 @@
 #include <StableMarriage/OptionE.h>
 #include <StableMarriage/OptionR.h>
 #include <StableMarriage/OptionP.h>
-#include <StableMarriage/OptionG.h>
 #include <iostream>
 #include <ctime>
 
@@ -18,7 +17,6 @@ int main() {
         std::cout << "(H) Hill Climbing Search\n";
         std::cout << "(P) Input Psuedo Latin Matrix\n";
         std::cout << "(E) Extract Top Seeds\n";
-        std::cout << "(G) Generate a new matrix that is n + 1\n\n";
         std::cout << "Enter choice: ";
         std::cin >> ch;
         std::cout << '\n' << '\n';
@@ -32,8 +30,6 @@ int main() {
             optionP();
         }else if (ch == 'E' || ch == 'e'){
             optionE();
-        }else if (ch == 'G' || ch == 'g'){
-            optionG();
         }
     }
     return 0;

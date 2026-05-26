@@ -20,6 +20,5 @@ void updateDisplayArray(int r, int c);
 void dropToOneLessN(int orignalN);
 void dropTo2LessN(int orignalN);
 void dropToLessN(int orignalN);
-void increaseNByOne(int beginningN);
 
 #endif /* MatrixManipFunctions_h */
