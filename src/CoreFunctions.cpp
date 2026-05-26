@@ -47,7 +47,7 @@ void backtrack(int &col) {
 void print(int q[]) {
     int i;
     std::cout<<"Man"<<"  "<<"Woman"<<std::endl;
-    for(i=0;i<n;i++)
+    for( i=0;i<n;i++)
     {
         std::cout<<" "<<i + 1<<"     "<<q[i] + 1<<std::endl;
     }
@@ -59,14 +59,13 @@ void numberOfStableMatchings() {
     int q[n];
     q[0]=0;
     int c=1;
-    bool fromBacktrack=false;
+    bool from_backtrack=false;
     while(iterationKiller){
         while(c<n){
-            if(!fromBacktrack){
+            if(!from_backtrack)
                 q[c]=-1;
-            }
             
-            fromBacktrack=false;
+            from_backtrack=false;
             while(q[c]<n){
                 q[c]++;
                 while(q[c]==n)
@@ -80,9 +79,8 @@ void numberOfStableMatchings() {
                 if (!iterationKiller){
                     break;
                 }
-                if(ok2(q, c)){
+                if(ok2(q, c))
                     break;
-                }
             }
             if (!iterationKiller){
                 break;
@@ -94,7 +92,7 @@ void numberOfStableMatchings() {
         }
         cnt ++;
         backtrack(c);
-        fromBacktrack=true;
+        from_backtrack=true;
     }
 }
 
@@ -324,8 +322,254 @@ void updateDisplayArray(int r, int c){
     displayArr[r][c] = cnt;
 }
 
-void increaseNByOne(int beginningN){
+void dropToOneLessN(int orignalN){
+    int badRow = 0;
+    int badCol = 0;
+    int row = 0;
+    int col = 0;
+    int count = 0;
+    int max = 0;
+    int lastIteraation = 0;
 
+    for (int i = 0; i < orignalN; i++)
+    {
+        for (int j = 0; j < orignalN; j++)
+        {
+            displayArr[i][j] = 0;
+        }
+    }
+    std::ifstream FileToRead;
+    FileToRead.open("/Users/thecownextdoorr/Desktop/eightcross.txt");
+    std::ofstream specialMatrixFile("/Users/thecownextdoorr/Desktop/eightToSevenForHeatMap.txt", std::ios::app);
+    std::string str;
+
+    while (FileToRead >> str)
+    {
+        badRow = 0;
+        badCol = 0;
+        row = 0;
+        col = 0;
+        max = 0;
+        lastIteraation = 0;
+        int m;
+        for (int i = 0; i < n + 1; i++)
+        {
+            for (int j = 0; j < n + 1; j++)
+            {
+                FileToRead >> m;
+                startNArray[i][j] = m;
+            }
+        }
+        do
+        {
+            row = 0;
+            col = 0;
+            for (int i = 0; i < orignalN; i++)
+            {
+                for (int j = 0; j < orignalN; j++)
+                {
+                    if ((i != badRow && j != badCol))
+                    {
+                        matrix[row][col].m = startNArray[i][j];
+                        matrix[row][col].w = n - matrix[row][col].m;
+                        if (col < orignalN - 2)
+                        {
+                            col++;
+                        }
+                        else if (col == orignalN - 2)
+                        {
+                            col = 0;
+                            row++;
+                        }
+                    }
+                }
+            }
+            convertToGeneral();
+            numberOfStableMatchings();
+            specialMatrixFile << "Number of SM is " << cnt << std::endl;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    specialMatrixFile << matrix[i][j].m + 1 << ' ' << matrix[i][j].w + 1 << "  ";
+                }
+                specialMatrixFile << '\n';
+            }
+            if (cnt > max)
+            {
+                max = cnt;
+            }
+            updateDisplayArray(badRow, badCol);
+            if (badRow == orignalN - 1 && badCol == orignalN - 1)
+            {
+                lastIteraation++;
+            }
+            else if (badRow < orignalN - 1)
+            {
+                badRow++;
+            }
+            else if (badRow == orignalN - 1)
+            {
+                badCol++;
+                badRow = 0;
+            }
+        } while ((badRow != orignalN || badCol != orignalN) && lastIteraation != 1);
+        count++;
+        specialMatrixFile << "Count is " << count << std::endl;
+        for (int i = 0; i < n + 1; i++)
+        {
+            for (int j = 0; j < n + 1; j++)
+            {
+                specialMatrixFile << startNArray[i][j] + 1 << " ";
+            }
+            specialMatrixFile << std::endl;
+        }
+        for (int i = 0; i < n + 1; i++)
+        {
+            for (int j = 0; j < n + 1; j++)
+            {
+                specialMatrixFile << displayArr[i][j] << "   ";
+            }
+            specialMatrixFile << std::endl;
+        }
+        std::cout << "count is " << count << std::endl;
+    }
+    specialMatrixFile.close();
+    FileToRead.close();
+    std::cout << std::endl << "max is " << max << std::endl;
+    std::cout << "count is " << count << std::endl;
+}
+
+void dropTo2LessN(int orignalN){
+    int row = 0;
+    int col = 0;
+    int count = 0;
+    int max  = 0;
+    std::ifstream FileToRead;
+    FileToRead.open("/Users/thecownextdoorr/Desktop/TenCross.txt");
+    std::ofstream FileToWrite("/Users/thecownextdoorr/Desktop/TenToEight.txt", std::ios::app);
+    std::string str;
+    while(FileToRead >> str){
+        int m;
+        for (int i = 0; i < n+2; i ++){
+            for (int j = 0; j < n+2; j ++){
+                FileToRead >> m;
+                startNArray[i][j] = m;
+                std::cout << startNArray[i][j] << " ";
+                }
+                std::cout << std::endl;
+            }
+        row = 0;
+        col = 0;
+        for(int badColOne = 0; badColOne < orignalN - 1; badColOne++){
+            for(int badColTwo = badColOne + 1; badColTwo < orignalN; badColTwo++){
+                for(int badRowOne = 0; badRowOne < orignalN - 1; badRowOne++){
+                    for(int badRowTwo = badRowOne + 1; badRowTwo < orignalN; badRowTwo++){
+                        row = 0;
+                        col = 0;
+                        for(int i = 0; i < orignalN; i++){
+                            for(int j = 0; j < orignalN; j ++){
+                                if((i != badRowOne && i != badRowTwo && j != badColOne && j != badColTwo)){
+                                    matrix[row][col].m = startNArray[i][j];
+                                    matrix[row][col].w =  n - matrix[row][col].m;
+                                    if(col < orignalN - 3){
+                                        col++;
+                                    }
+                                    else if (col == orignalN - 3){
+                                        col = 0;
+                                        row++;
+                                    }
+                                }
+                            }
+                        }
+                        convertToGeneral();
+                        numberOfStableMatchings();
+                        if(cnt > max){
+                            max = cnt;
+                        }
+                        count++;
+                        std::cout << "count is " << count<< std::endl;
+                        for (int i = 0; i < n; i ++){
+                            for (int j = 0; j < n; j ++){
+                                std::cout << matrix[i][j].m << ' ' << matrix[i][j].w << "  ";
+                            }
+                            std::cout << '\n';
+                        }
+                        std::cout << '\n';
+                        FileToWrite << "Number of SM " << cnt << std::endl;
+                        for (int i = 0; i < n; i ++){
+                            for (int j = 0; j < n; j ++){
+                                FileToWrite << matrix[i][j].m + 1 << ' ' << matrix[i][j].w + 1 << "  ";
+                            }
+                            FileToWrite << '\n';
+                        }
+                        FileToWrite << '\n';
+                    }
+                }
+            }
+        }
+    }
+    std::cout << "count is " << count;
+    std::cout << "max is " << max << std::endl;
+    FileToRead.close();
+    FileToWrite.close();
+}
+
+void dropToLessN(int orignalN){
+    int row = 0;
+    int col = 0;
+    int count = 0;
+    int max  = 0;
+    for(int badColOne = 0; badColOne < orignalN - 2; badColOne++){
+    for(int badColTwo = badColOne + 1; badColTwo < orignalN - 1; badColTwo++){
+    for(int badColThree = badColTwo + 1; badColThree < orignalN; badColThree++){
+    for(int badRowOne = 0; badRowOne < orignalN - 2; badRowOne++){
+    for(int badRowTwo = badRowOne + 1; badRowTwo < orignalN - 1; badRowTwo++){
+    for(int badRowThree = badRowTwo + 1; badRowThree < orignalN; badRowThree++){
+    row = 0;
+    col = 0;
+    for(int i = 0; i < orignalN; i++){
+        for(int j = 0; j < orignalN; j ++){
+            if((i != badRowOne && i != badRowTwo && i != badRowThree && j != badColOne && j != badColTwo && j != badColThree)){
+                matrix[row][col].m = startNArray[i][j];
+                matrix[row][col].w =  n - matrix[row][col].m;
+                if(col < orignalN - 4){
+                    col++;
+                }
+                else if (col == orignalN - 4){
+                    col = 0;
+                    row++;
+                }
+            }
+       }
+    }
+    convertToGeneral();
+    numberOfStableMatchings();
+    if(cnt > max){
+        max = cnt;
+    }
+    count++;
+    std::cout << "count is " << count <<std::endl;
+    std::ofstream myFile("/Users/thecownextdoorr/Desktop/18to15BeforeHillClimb", std::ios::app);
+            for (int i = 0; i < n; i ++){
+                for (int j = 0; j < n; j ++){
+                    myFile << matrix[i][j].m + 1 << ' ' << matrix[i][j].w + 1 << "  ";
+                }
+                myFile << '\n';
+            }
+            myFile << '\n';
+            myFile.close();
+    }
+    }
+    }
+    }
+    }
+    }
+    std::cout << "count is " << count;
+    std::cout << "max is " << max << std::endl;
+}
+
+void increaseNByOne(int beginningN){
     std::ifstream FileToRead;
     int m;
     FileToRead.open("/Users/thecownextdoorr/Desktop/SixCross.txt");
