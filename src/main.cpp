@@ -17,12 +17,12 @@ int main() {
     
     while(1) {
         std::cout << "Choose an option below:\n\n";
-        std::cout << "(S) Settings (Change n)\n";
         std::cout << "(R) Generate And Calculate Random Samples\n";
         std::cout << "(L) Test Latin Matrix\n";
         std::cout << "(H) Hill Climbing Search\n";
         std::cout << "(P) Input Psuedo Latin Matrix\n";
-        std::cout << "(E) Extract Top Seeds\n";
+        std::cout << "(E) Extract Top Seeds\n\n";
+        std::cout << "(S) Settings (Change n)\n";
         std::cout << "(Q) Quit Program\n";
         std::cout << "\nEnter choice: ";
         
