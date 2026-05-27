@@ -5,9 +5,29 @@
 #include <string>
 #include <chrono>
 
+void initializeSystem(int newN) {
+    n = newN;
+    
+    matrix.assign(n, std::vector<PAIR>(n));
+    largestMatrix.assign(n, std::vector<PAIR>(n));
+    fattestMatrix.assign(n, std::vector<PAIR>(n));
+    latinMatrix.assign(n, std::vector<int>(n));
+    
+    displayArr.assign(n + 1, std::vector<int>(n + 1, 0));
+    startNArray.assign(n + 2, std::vector<int>(n + 2, 0));
+    
+    histogram.assign(histogramSize, 0);
+    mRank.clear();
+    wRank.clear();
+    cnt = 0;
+    largest = 0;
+    fattest = 0;
+    mean = 0.0;
+}
+
 // From NumberOfSMFunctions.h
 
-bool ok2(int q[], int col) {
+bool ok2(const std::vector<int>& q, int col) {
     int i;
     for(i=0; i<col;i++){
         if(q[col]==q[i])
@@ -56,7 +76,7 @@ void print(int q[]) {
 void numberOfStableMatchings() {
     iterationKiller = true;
     cnt = 0;
-    int q[n];
+    std::vector<int> q(n);
     q[0]=0;
     int c=1;
     bool from_backtrack=false;
@@ -175,16 +195,16 @@ int findIndex(int temp[], int size, int num){
 }
 
 void convertToGeneral(){
-    int arr[n];
-    int temp[n];
+    std::vector<int> arr(n);
+    std::vector<int> temp(n);
     for (int i = 0; i < n; i ++){
         for (int j = 0; j < n; j ++){
             arr[j] = matrix[i][j].m;
             temp[j] = matrix[i][j].m;
         }
-        std::sort(temp, temp + n);
+        std::sort(temp.begin(), temp.end());
         for(int k = 0; k < n; k++){
-            arr[k] = findIndex(temp, n, arr[k]);
+            arr[k] = findIndex(temp.data(), n, arr[k]);
             matrix[i][k].m = arr[k];
         }
     }
@@ -193,9 +213,9 @@ void convertToGeneral(){
             arr[j] = matrix[j][i].w;
             temp[j] = matrix[j][i].w;
         }
-        std::sort(temp, temp + n);
+        std::sort(temp.begin(), temp.end());
         for(int k = 0; k < n; k++){
-            arr[k] = findIndex(temp, n, arr[k]);
+            arr[k] = findIndex(temp.data(), n, arr[k]);
             matrix[k][i].w = arr[k];
         }
     }

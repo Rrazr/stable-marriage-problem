@@ -8,28 +8,32 @@ struct PAIR {
     int m, w;
 };
 
-// Constants
-// Requires C++ 17+
-inline const int n = 7;
-inline const int MAX_SM = 1231;
-inline const int histogramSize = 100000;
+// Global Configuration (Adjustable)
+extern int n;
+extern int MAX_SM;
+extern int histogramSize;
 
-// Shared Global Variables
-extern PAIR matrix[n][n];
-extern int displayArr[n+1][n+1];
-extern int startNArray[n+1][n+1];
+// Shared Global Variables (Dynamic Vectors)
+extern std::vector<std::vector<PAIR>> matrix;
+extern std::vector<std::vector<int>> displayArr;
+extern std::vector<std::vector<int>> startNArray;
+extern std::vector<std::vector<PAIR>> largestMatrix;
+extern std::vector<std::vector<PAIR>> fattestMatrix;
+extern std::vector<std::vector<int>> latinMatrix;
+extern std::vector<int> histogram;
+
+// Scalar Globals
 extern int cnt;
 extern int largest;
-extern PAIR largestMatrix[n][n];
 extern int fattest;
-extern PAIR fattestMatrix[n][n];
-extern int histogram[histogramSize];
 extern bool iterationKiller;
 extern double mean;
 extern std::vector<int> mRank;
 extern std::vector<int> wRank;
 extern char ch;
 extern bool Pseudo;
-extern int latinMatrix[n][n];
+
+// System initialization and resizing
+void initializeSystem(int newN);
 
 #endif

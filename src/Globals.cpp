@@ -1,18 +1,23 @@
 #include <StableMarriage/Globals.h>
 
-PAIR matrix[n][n];
-int displayArr[n+1][n+1];
-int startNArray[n+1][n+1];
-int cnt;
+int n = 7;
+int MAX_SM = 1231;
+int histogramSize = 100000;
+
+std::vector<std::vector<PAIR>> matrix;
+std::vector<std::vector<int>> displayArr;
+std::vector<std::vector<int>> startNArray;
+std::vector<std::vector<PAIR>> largestMatrix;
+std::vector<std::vector<PAIR>> fattestMatrix;
+std::vector<std::vector<int>> latinMatrix;
+std::vector<int> histogram;
+
+int cnt = 0;
 int largest = 0;
-PAIR largestMatrix[n][n];
 int fattest = 0;
-PAIR fattestMatrix[n][n];
-int histogram[histogramSize];
-bool iterationKiller;
+bool iterationKiller = false;
 double mean = 0.0;
 std::vector<int> mRank;
 std::vector<int> wRank;
 char ch;
 bool Pseudo = false;
-int latinMatrix[n][n];
