@@ -11,16 +11,22 @@ int main() {
     std::srand((unsigned int)std::time(0));
     
     while(1) {
-        std::cout << "Choose an option below:\n";
+        std::cout << "Choose an option below:\n\n";
         std::cout << "(R) Generate And Calculate Random Samples\n";
         std::cout << "(L) Test Latin Matrix\n";
         std::cout << "(H) Hill Climbing Search\n";
         std::cout << "(P) Input Psuedo Latin Matrix\n";
         std::cout << "(E) Extract Top Seeds\n";
-        std::cout << "Enter choice: ";
+        std::cout << "(Q) Quit Program\n";
+        std::cout << "\nEnter choice: ";
+        
         std::cin >> ch;
         std::cout << '\n' << '\n';
-        if (ch == 'R' || ch == 'r'){
+
+        if (ch == 'Q' || ch == 'q') {
+            std::cout << "Exiting program...\n";
+            break;
+        } else if (ch == 'R' || ch == 'r'){
             optionR();
         }else if (ch == 'L' || ch == 'l'){
             optionL();
