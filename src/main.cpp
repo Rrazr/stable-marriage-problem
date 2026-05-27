@@ -2,8 +2,8 @@
 #include <StableMarriage/OptionL.h>
 #include <StableMarriage/OptionH.h>
 #include <StableMarriage/OptionE.h>
+#include <StableMarriage/OptionG.h>
 #include <StableMarriage/OptionR.h>
-#include <StableMarriage/OptionP.h>
 #include <StableMarriage/OptionS.h>
 #include <StableMarriage/UIUtils.h>
 #include <iostream>
@@ -20,10 +20,10 @@ int main() {
     while(1) {
         clearScreen();
         std::cout << "Choose an option below:\n\n";
-        std::cout << "(R) Generate And Calculate Random Samples\n";
+        std::cout << "(G) Generate And Calculate Random Samples\n";
         std::cout << "(L) Test Latin Matrix\n";
         std::cout << "(H) Hill Climbing Search\n";
-        std::cout << "(P) Input Psuedo Latin Matrix\n";
+        std::cout << "(R) Matrix Reduction\n";
         std::cout << "(E) Extract Top Seeds\n\n";
         std::cout << "(S) Settings\n";
         std::cout << "(Q) Quit Program\n";
@@ -37,8 +37,8 @@ int main() {
             break;
         } else if (ch == 'S' || ch == 's') {
             optionS();
-        } else if (ch == 'R' || ch == 'r'){
-            optionR();
+        } else if (ch == 'G' || ch == 'g'){
+            optionG();
             waitForEnter();
         }else if (ch == 'L' || ch == 'l'){
             optionL();
@@ -46,8 +46,8 @@ int main() {
         }else if (ch == 'H' || ch == 'h'){
             optionH();
             waitForEnter();
-        }else if (ch == 'P' || ch == 'p'){
-            optionP();
+        }else if (ch == 'R' || ch == 'r'){
+            optionR();
             waitForEnter();
         }else if (ch == 'E' || ch == 'e'){
             optionE();

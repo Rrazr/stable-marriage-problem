@@ -21,7 +21,7 @@ void optionL(){
     std::ifstream inputFile;
     inputFile.open("/Users/ryan/Desktop/" + fileName);
     if (!inputFile) {
-        std::cout << "Error opening file.txt" << std::endl;
+        std::cout << "Error opening file.txt" << '\n';
         std::exit(1);
     }
     while (inputFile >> latinVal){
@@ -41,7 +41,7 @@ void optionL(){
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
          
         std::cout << "Time taken by profile " << Counter << ": "
-        << duration.count() << " milliseconds" << std::endl << '\n';
+        << duration.count() << " milliseconds" << "\n\n";
         Counter++;
     }
 

@@ -17,8 +17,6 @@ void swapMen(int i, int j, int k);
 void swapWomen(int i, int j, int k);
 void displayDifferentNumbers();
 void updateDisplayArray(int r, int c);
-void dropToOneLessN(int orignalN);
-void dropTo2LessN(int orignalN);
-void dropToLessN(int orignalN);
+void clearScreen();
 
 #endif /* MatrixManipFunctions_h */
