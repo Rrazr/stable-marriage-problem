@@ -1,7 +1,7 @@
 #ifndef MatrixManipFunctions_h
 #define MatrixManipFunctions_h
 
-#include "Globals.h"
+#include <StableMarriage/Globals.h>
 
 void printHistogram();
 void printMatrix();

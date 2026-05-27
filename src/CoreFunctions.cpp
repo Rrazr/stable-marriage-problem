@@ -1,4 +1,5 @@
 #include <StableMarriage/Globals.h>
+#include <StableMarriage/UIUtils.h>
 #include <iostream>
 #include <algorithm>
 #include <fstream>
@@ -587,4 +588,18 @@ void dropToLessN(int orignalN){
     }
     std::cout << "count is " << count;
     std::cout << "max is " << max << std::endl;
+}
+
+void clearScreen() {
+#ifdef _WIN32
+    std::system("cls");
+#else
+    std::system("clear");
+#endif
+}
+
+void waitForEnter() {
+    std::cout << "\nPress Enter to continue...";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cin.get();
 }

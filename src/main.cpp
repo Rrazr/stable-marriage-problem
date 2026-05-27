@@ -5,6 +5,7 @@
 #include <StableMarriage/OptionR.h>
 #include <StableMarriage/OptionP.h>
 #include <StableMarriage/OptionS.h>
+#include <StableMarriage/UIUtils.h>
 #include <iostream>
 #include <ctime>
 
@@ -17,6 +18,7 @@ int main() {
     initializeSystem(initialN);
     
     while(1) {
+        clearScreen();
         std::cout << "Choose an option below:\n\n";
         std::cout << "(R) Generate And Calculate Random Samples\n";
         std::cout << "(L) Test Latin Matrix\n";
@@ -37,14 +39,19 @@ int main() {
             optionS();
         } else if (ch == 'R' || ch == 'r'){
             optionR();
+            waitForEnter();
         }else if (ch == 'L' || ch == 'l'){
             optionL();
+            waitForEnter();
         }else if (ch == 'H' || ch == 'h'){
             optionH();
+            waitForEnter();
         }else if (ch == 'P' || ch == 'p'){
             optionP();
+            waitForEnter();
         }else if (ch == 'E' || ch == 'e'){
             optionE();
+            waitForEnter();
         }
     }
     return 0;

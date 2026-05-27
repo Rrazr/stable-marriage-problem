@@ -2,11 +2,15 @@
 #include <StableMarriage/Globals.h>
 #include <StableMarriage/NumberOfSMFunctions.h>
 #include <StableMarriage/MatrixManipFunctions.h>
+#include <StableMarriage/UIUtils.h>
 #include <iostream>
 #include <fstream>
 #include <string>
 
 void optionE(){
+    clearScreen();
+    std::cout << "--- Extract Top Seeds ---\n\n";
+
     std::string fileName, randStr;
     int SM, m, w, topSeed = 0;
     std::cout << "Enter seeds file: ";

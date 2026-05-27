@@ -2,12 +2,15 @@
 #include <StableMarriage/Globals.h>
 #include <StableMarriage/NumberOfSMFunctions.h>
 #include <StableMarriage/MatrixManipFunctions.h>
+#include <StableMarriage/UIUtils.h>
 #include <iostream>
 #include <fstream>
 
 void optionH(){
+    clearScreen();
+    std::cout << "--- Hill Climbing Search ---\n\n";
+
     bool notFromFile = false;
-    std::cout << '\n';
     std::cout << "(A) Randomized matrix\n";
     std::cout << "(B) Input normal matrix\n";
     std::cout << "(C) Input Latin matrix\n";

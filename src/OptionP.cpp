@@ -2,16 +2,20 @@
 #include <StableMarriage/Globals.h>
 #include <StableMarriage/NumberOfSMFunctions.h>
 #include <StableMarriage/MatrixManipFunctions.h>
+#include <StableMarriage/UIUtils.h>
 #include <iostream>
 
 void optionP() {
+    clearScreen();
+    std::cout << "--- Input Psuedo Latin Matrix ---\n\n";
+
     int m;
     std::cout << "(A) Enter your own psuedo latin" << std::endl;
     std::cout << "(C) Generate all the SM's of n - 1" << std::endl;
     std::cout << "(D) Drop three" << std::endl;
     std::cout << "(E) Drop two" << std::endl;
 
-    std::cout << "Enter choice: " << std::endl;
+    std::cout << "\nEnter choice: ";
     std::cin >> ch;
     if(ch == 'a' || ch == 'A'){
         for (int i = 0; i < n; i ++){

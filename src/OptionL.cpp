@@ -2,12 +2,16 @@
 #include <StableMarriage/Globals.h>
 #include <StableMarriage/NumberOfSMFunctions.h>
 #include <StableMarriage/MatrixManipFunctions.h>
+#include <StableMarriage/UIUtils.h>
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <chrono>
 
 void optionL(){
+    clearScreen();
+    std::cout << "--- Test Latin Matrix ---\n\n";
+
     std::string fileName;
     largest = 0;
     int Counter = 1, latinVal;
