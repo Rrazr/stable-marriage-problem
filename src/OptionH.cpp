@@ -18,10 +18,12 @@ void optionH(){
     std::cout << "(D) Input File\n\n";
     std::cout << "Enter choice: ";
     std::cin >> ch;
+
     if (ch == 'A' || ch == 'a'){
         randomizer();
         notFromFile = true;
-    }else if (ch == 'B' || ch == 'b'){
+    }
+    else if (ch == 'B' || ch == 'b'){
         int m, w;
         for (int i = 0; i < n; i ++){
             std::cout << "Enter Row " << i + 1 << ": ";
@@ -39,7 +41,8 @@ void optionH(){
             std::cout << '\n';
         }
         notFromFile = true;
-    }else if (ch == 'C' || ch == 'c'){
+    }
+    else if (ch == 'C' || ch == 'c'){
         int num;
         for (int i = 0; i < n; i ++){
             std::cout << "Enter Row " << i + 1 << ": ";
@@ -57,6 +60,7 @@ void optionH(){
             std::cout << '\n';
         }
         notFromFile = true;
+    }
 
     
     if (notFromFile){
