@@ -7,8 +7,56 @@
 #include <fstream>
 #include <limits>
 
+void hillClimb() {
+    largest = 0;
+    numberOfStableMatchings();
+    localMax = largest;
+    for (int i = 0; i < n; i ++){
+        for (int j = 0; j < n; j ++){
+            localMaxMatrix[i][j].m = largestMatrix[i][j].m;
+            localMaxMatrix[i][j].w = largestMatrix[i][j].w;
+        }
+    }
+    while (1) {
+        largest = 0;
+        for (int i = 0; i < n; i ++){
+            for (int j = 0; j < n - 1; j ++){
+                for (int k = j + 1; k < n; k ++){
+                    swapMen(i, j, k);
+                    numberOfStableMatchings();
+                    swapMen(i, j, k);
+                }
+            }
+        }
+        for (int i = 0; i < n; i ++){
+            for (int j = 0; j < n - 1; j ++){
+                for (int k = j + 1; k < n; k ++){
+                    swapWomen(i, j, k);
+                    numberOfStableMatchings();
+                    swapWomen(i, j, k);
+                }
+            }
+        }
+        if (largest <= localMax){
+            break;
+        }else{
+            std::cout << "Largest: " << largest << '\n';
+            localMax = largest;
+            for (int i = 0; i < n; i ++){
+                for (int j = 0; j < n; j ++){
+                    localMaxMatrix[i][j].m = largestMatrix[i][j].m;
+                    localMaxMatrix[i][j].w = largestMatrix[i][j].w;
+                    matrix[i][j].m = largestMatrix[i][j].m;
+                    matrix[i][j].w = largestMatrix[i][j].w;
+                }
+            }
+        }
+    }
+}
+
 void optionH(){
     clearScreen();
+    clearHistogram();
     std::cout << "--- Hill Climbing Search ---\n\n";
 
     bool notFromFile = false;
@@ -18,6 +66,7 @@ void optionH(){
     std::cout << "(D) Input File\n\n";
     std::cout << "Enter choice: ";
     std::cin >> ch;
+    std::cout << '\n';
 
     if (ch == 'A' || ch == 'a'){
         randomizer();
@@ -62,55 +111,10 @@ void optionH(){
         notFromFile = true;
     }
 
-    
     if (notFromFile){
-        largest = 0;
-        numberOfStableMatchings();
-        fattest = largest;
-        for (int i = 0; i < n; i ++){
-            for (int j = 0; j < n; j ++){
-                fattestMatrix[i][j].m = largestMatrix[i][j].m;
-                fattestMatrix[i][j].w = largestMatrix[i][j].w;
-            }
-        }
-        while (1) {
-            largest = 0;
-            for (int i = 0; i < n; i ++){
-                for (int j = 0; j < n - 1; j ++){
-                    for (int k = j + 1; k < n; k ++){
-                        swapMen(i, j, k);
-                        numberOfStableMatchings();
-                        swapMen(i, j, k);
-                    }
-                }
-            }
-            for (int i = 0; i < n; i ++){
-                for (int j = 0; j < n - 1; j ++){
-                    for (int k = j + 1; k < n; k ++){
-                        swapWomen(i, j, k);
-                        numberOfStableMatchings();
-                        swapWomen(i, j, k);
-                    }
-                }
-            }
-            if (largest <= fattest){
-                std::cout << 1 << '\n';
-                break;
-            }else{
-                std::cout << "Largest: " << largest << '\n';
-                fattest = largest;
-                for (int i = 0; i < n; i ++){
-                    for (int j = 0; j < n; j ++){
-                        fattestMatrix[i][j].m = largestMatrix[i][j].m;
-                        fattestMatrix[i][j].w = largestMatrix[i][j].w;
-                        matrix[i][j].m = largestMatrix[i][j].m;
-                        matrix[i][j].w = largestMatrix[i][j].w;
-                    }
-                }
-            }
-        }
-        std::cout << "Fattest: " << fattest << '\n';
-    }else if (!notFromFile && (ch == 'D' || ch == 'd')){
+        hillClimb();
+        std::cout << "\nLocal Max: " << localMax << '\n';
+    }else if (ch == 'D' || ch == 'd'){
         std::string randy;
         int counter = 0;
         int randyInt;
@@ -134,62 +138,18 @@ void optionH(){
                     matrix[i][j].w = w - 1;
                 }
             }
-            largest = 0;
-            numberOfStableMatchings();
-            seedSM = largest;
-            fattest = largest;
-            for (int i = 0; i < n; i ++){
-                for (int j = 0; j < n; j ++){
-                    fattestMatrix[i][j].m = largestMatrix[i][j].m;
-                    fattestMatrix[i][j].w = largestMatrix[i][j].w;
-                }
-            }
-            while (1) {
-                largest = 0;
-                for (int i = 0; i < n; i ++){
-                    for (int j = 0; j < n - 1; j ++){
-                        for (int k = j + 1; k < n; k ++){
-                            swapMen(i, j, k);
-                            numberOfStableMatchings();
-                            swapMen(i, j, k);
-                        }
-                    }
-                }
-                for (int i = 0; i < n; i ++){
-                    for (int j = 0; j < n - 1; j ++){
-                        for (int k = j + 1; k < n; k ++){
-                            swapWomen(i, j, k);
-                            numberOfStableMatchings();
-                            swapWomen(i, j, k);
-                        }
-                    }
-                }
-                if (largest <= fattest){
-                    std::cout << 1 << '\n';
-                    break;
-                }else{
-                    std::cout << "Largest: " << largest << '\n';
-                    fattest = largest;
-                    for (int i = 0; i < n; i ++){
-                        for (int j = 0; j < n; j ++){
-                            fattestMatrix[i][j].m = largestMatrix[i][j].m;
-                            fattestMatrix[i][j].w = largestMatrix[i][j].w;
-                            matrix[i][j].m = largestMatrix[i][j].m;
-                            matrix[i][j].w = largestMatrix[i][j].w;
-                        }
-                    }
-                }
-            }
+            hillClimb();
+            seedSM = localMax;
             outputFile << "Seed: " << seedSM << '\n';
-            outputFile << "Number of Stable Marriages: " << fattest << '\n';
+            outputFile << "Number of Stable Marriages: " << localMax << '\n';
             for (int i = 0; i < n; i ++){
                 for (int j = 0; j < n; j ++){
-                    outputFile << fattestMatrix[i][j].m + 1 << ' ' << fattestMatrix[i][j].w + 1 << "  ";
+                    outputFile << localMaxMatrix[i][j].m + 1 << ' ' << localMaxMatrix[i][j].w + 1 << "  ";
                 }
                 outputFile << '\n';
             }
-            histogram[fattest]++;
-            mean += fattest;
+            histogram[localMax]++;
+            mean += localMax;
             counter ++;
             std::cout << "Counter: " << counter << '\n';
         }

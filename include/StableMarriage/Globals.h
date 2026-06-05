@@ -18,14 +18,14 @@ extern std::vector<std::vector<PAIR>> matrix;
 extern std::vector<std::vector<int>> displayArr;
 extern std::vector<std::vector<int>> startNArray;
 extern std::vector<std::vector<PAIR>> largestMatrix;
-extern std::vector<std::vector<PAIR>> fattestMatrix;
+extern std::vector<std::vector<PAIR>> localMaxMatrix;
 extern std::vector<std::vector<int>> latinMatrix;
 extern std::vector<int> histogram;
 
 // Scalar Globals
 extern int cnt;
 extern int largest;
-extern int fattest;
+extern int localMax;
 extern bool iterationKiller;
 extern double mean;
 extern std::vector<int> mRank;

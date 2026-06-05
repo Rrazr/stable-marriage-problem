@@ -11,7 +11,7 @@ void initializeSystem(int newN) {
     
     matrix.assign(n, std::vector<PAIR>(n));
     largestMatrix.assign(n, std::vector<PAIR>(n));
-    fattestMatrix.assign(n, std::vector<PAIR>(n));
+    localMaxMatrix.assign(n, std::vector<PAIR>(n));
     latinMatrix.assign(n, std::vector<int>(n));
     
     displayArr.assign(n + 1, std::vector<int>(n + 1, 0));
@@ -22,7 +22,7 @@ void initializeSystem(int newN) {
     wRank.clear();
     cnt = 0;
     largest = 0;
-    fattest = 0;
+    localMax = 0;
     mean = 0.0;
 }
 
