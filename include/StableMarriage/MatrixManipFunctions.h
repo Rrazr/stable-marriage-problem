@@ -3,7 +3,7 @@
 
 #include <StableMarriage/Globals.h>
 
-void printHistogram();
+void printHistogram(int numSamples);
 void printMatrix();
 int findIndex(int temp[], int size, int num);
 void convertToGeneral();

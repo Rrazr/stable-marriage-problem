@@ -49,7 +49,7 @@ bool ok2(const std::vector<int>& q, int col) {
 void backtrack(int &col) {
     col--;
     if(col==-1){
-        std::cout << "Number of Stable Marriages: " << cnt << '\n';
+        //std::cout << "Number of Stable Marriages: " << cnt << '\n';
         mean += cnt;
         histogram[cnt] ++;
         if (cnt > largest){
@@ -166,13 +166,13 @@ void readAndWriteFromFile(){
 
 // From MatrixManipFunctions.h
 
-void printHistogram(){
+void printHistogram(int numSamples){
     for (int i = 0; i < histogramSize; i ++){
         if (histogram[i] != 0){
             std::cout << i << ": " << histogram[i] << '\n';
         }
     }
-    std::cout << "Mean: " << mean / 1000.0 << '\n';
+    std::cout << "Mean: " << mean / numSamples << '\n';
 }
 
 void printMatrix(){

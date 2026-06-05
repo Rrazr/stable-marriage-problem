@@ -47,7 +47,6 @@ void optionL(){
     }
 
     std::cout << "Most number of stable matchings: " << largest << '\n' << '\n';
-    printHistogram();
     inputFile.close();
 
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

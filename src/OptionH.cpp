@@ -111,7 +111,6 @@ void optionH(){
             mean += fattest;
             std::cout << "Fattest: " << fattest << '\n';
         }
-        printHistogram();
     }
     
     if (notFromFile){
@@ -244,7 +243,6 @@ void optionH(){
             counter ++;
             std::cout << "Counter: " << counter << '\n';
         }
-        printHistogram();
         inputFile.close();
         outputFile.close();
     }
