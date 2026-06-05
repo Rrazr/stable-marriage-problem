@@ -15,8 +15,7 @@ void optionH(){
     std::cout << "(A) Randomized matrix\n";
     std::cout << "(B) Input normal matrix\n";
     std::cout << "(C) Input Latin matrix\n";
-    std::cout << "(D) Input File\n";
-    std::cout << "(E) Misc.\n\n";
+    std::cout << "(D) Input File\n\n";
     std::cout << "Enter choice: ";
     std::cin >> ch;
     if (ch == 'A' || ch == 'a'){
@@ -58,60 +57,7 @@ void optionH(){
             std::cout << '\n';
         }
         notFromFile = true;
-    }else if (ch == 'E' || ch =='e'){
-        int i;
-        for (i = 0; i < 1000; i ++){
-            randomizer();
-            largest = 0;
-            numberOfStableMatchings();
-            fattest = largest;
-            for (int i = 0; i < n; i ++){
-                for (int j = 0; j < n; j ++){
-                    fattestMatrix[i][j].m = largestMatrix[i][j].m;
-                    fattestMatrix[i][j].w = largestMatrix[i][j].w;
-                }
-            }
-            while (1) {
-                largest = 0;
-                for (int i = 0; i < n; i ++){
-                    for (int j = 0; j < n - 1; j ++){
-                        for (int k = j + 1; k < n; k ++){
-                            swapMen(i, j, k);
-                            numberOfStableMatchings();
-                            swapMen(i, j, k);
-                        }
-                    }
-                }
-                for (int i = 0; i < n; i ++){
-                    for (int j = 0; j < n - 1; j ++){
-                        for (int k = j + 1; k < n; k ++){
-                            swapWomen(i, j, k);
-                            numberOfStableMatchings();
-                            swapWomen(i, j, k);
-                        }
-                    }
-                }
-                if (largest <= fattest){
-                    break;
-                }
-                else{
-                    std::cout << "Largest: " << largest << '\n';
-                    fattest = largest;
-                    for (int i = 0; i < n; i ++){
-                        for (int j = 0; j < n; j ++){
-                            fattestMatrix[i][j].m = largestMatrix[i][j].m;
-                            fattestMatrix[i][j].w = largestMatrix[i][j].w;
-                            matrix[i][j].m = largestMatrix[i][j].m;
-                            matrix[i][j].w = largestMatrix[i][j].w;
-                        }
-                    }
-                }
-            }
-            histogram[fattest] ++;
-            mean += fattest;
-            std::cout << "Fattest: " << fattest << '\n';
-        }
-    }
+
     
     if (notFromFile){
         largest = 0;
