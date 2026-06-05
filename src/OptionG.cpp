@@ -5,6 +5,7 @@
 #include <StableMarriage/UIUtils.h>
 #include <iostream>
 #include <chrono>
+#include <limits>
 
 void optionG() {
     clearScreen();
@@ -21,4 +22,6 @@ void optionG() {
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
     std::cout << "Time taken by function: " << duration.count() << " ms" << "\n\n";
+
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

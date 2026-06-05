@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <limits>
 
 void optionE(){
     clearScreen();
@@ -61,4 +62,6 @@ void optionE(){
     }
     seedsFile.close();
     outputFile.close();
+
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

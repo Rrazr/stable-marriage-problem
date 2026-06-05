@@ -1,7 +1,9 @@
 #ifndef OptionR_h
 #define OptionR_h
 
+#include <string>
+
 void optionR();
-void dropToOneLessN(int orignalN);
+void dropToOneLessN(const std::string& inputFilename, const std::string& outputFilename);
 
 #endif /* OptionR_h */

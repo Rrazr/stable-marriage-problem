@@ -2,6 +2,7 @@
 #include <StableMarriage/Globals.h>
 #include <StableMarriage/UIUtils.h>
 #include <iostream>
+#include <limits>
 
 void optionS() {
     char settingChoice;
@@ -16,23 +17,29 @@ void optionS() {
         
         if (settingChoice == 'B' || settingChoice == 'b') {
             break;
-        } else if (settingChoice == '1') {
+        }
+        else if (settingChoice == '1') {
             clearScreen();
             std::cout << "--- Change Matrix Size (n) ---\n\n";
             int newN;
             std::cout << "Current n = " << n << "\nEnter new matrix size (n): ";
             std::cin >> newN;
             initializeSystem(newN);
-            std::cout << "\nSystem initialized with n = " << n << "\n";
+            std::cout << "\nSystem initialized with n = " << n << "\n\n";
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             waitForEnter();
-        } else if (settingChoice == '2') {
+        }
+        else if (settingChoice == '2') {
             clearScreen();
             std::cout << "--- Change MAX_SM ---\n\n";
             int newMax;
             std::cout << "Current MAX_SM = " << MAX_SM << "\nEnter new MAX_SM: ";
             std::cin >> newMax;
             MAX_SM = newMax;
-            std::cout << "\nMAX_SM updated to " << MAX_SM << "\n";
+            std::cout << "\nMAX_SM updated to " << MAX_SM << "\n\n";
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             waitForEnter();
         }
     }

@@ -5,6 +5,7 @@
 #include <StableMarriage/UIUtils.h>
 #include <iostream>
 #include <fstream>
+#include <limits>
 
 void optionH(){
     clearScreen();
@@ -247,4 +248,6 @@ void optionH(){
         inputFile.close();
         outputFile.close();
     }
+
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

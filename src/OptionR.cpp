@@ -6,135 +6,130 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <filesystem>
+#include <ios>
+#include <limits>
 
-void dropToOneLessN(int orignalN){
-    int badRow = 0;
-    int badCol = 0;
-    int row = 0;
-    int col = 0;
-    int count = 0;
-    int max = 0;
-    int lastIteraation = 0;
+void dropToOneLessN(const std::string& inputFilename, const std::string& outputFilename){
+    // sourceN is the size of the matrix we are reading (one larger than current system n)
+    int sourceN = n + 1;
 
-    for (int i = 0; i < orignalN; i++)
+    // Construct cross-platform paths
+    std::filesystem::path inputPath = std::filesystem::path("inputs") / inputFilename;
+    std::filesystem::path outputPath = std::filesystem::path("outputs") / outputFilename;
+
+    // Ensure outputs directory exists
+    std::filesystem::create_directories("outputs");
+
+    std::ifstream inputFile(inputPath);
+    if (!inputFile) {
+        std::cout << "\n[ERROR] Could not open input file: " << inputPath.string() << "\n";
+        std::cout << "Please ensure the file is located in the 'inputs' folder.\n";
+        return;
+    }
+
+    std::ofstream outputFile(outputPath);
+    if (!outputFile) {
+        std::cout << "\n[ERROR] Could not create output file: " << outputPath.string() << "\n";
+        return;
+    }
+
+
+    int m;
+    for (int i = 0; i < sourceN; i++)
     {
-        for (int j = 0; j < orignalN; j++)
+        for (int j = 0; j < sourceN; j++)
         {
-            displayArr[i][j] = 0;
+            inputFile >> m;
+            startNArray[i][j] = m;
         }
     }
-    std::ifstream FileToRead;
-    FileToRead.open("/Users/thecownextdoorr/Desktop/eightcross.txt");
-    std::ofstream specialMatrixFile("/Users/thecownextdoorr/Desktop/eightToSevenForHeatMap.txt", std::ios::app);
-    std::string str;
 
-    while (FileToRead >> str)
+    int row = 0;
+    int col = 0;
+    int maxSM = 0;
+
+    for (int badRow = 0; badRow < sourceN; badRow++)
     {
-        badRow = 0;
-        badCol = 0;
-        row = 0;
-        col = 0;
-        max = 0;
-        lastIteraation = 0;
-        int m;
-        for (int i = 0; i < n + 1; i++)
-        {
-            for (int j = 0; j < n + 1; j++)
-            {
-                FileToRead >> m;
-                startNArray[i][j] = m;
-            }
-        }
-        do
+        for (int badCol = 0; badCol < sourceN; badCol++)
         {
             row = 0;
             col = 0;
-            for (int i = 0; i < orignalN; i++)
+
+            for (int i = 0; i < sourceN; i++)
             {
-                for (int j = 0; j < orignalN; j++)
+                for (int j = 0; j < sourceN; j++)
                 {
                     if ((i != badRow && j != badCol))
                     {
                         matrix[row][col].m = startNArray[i][j];
-                        matrix[row][col].w = n - matrix[row][col].m;
-                        if (col < orignalN - 2)
+                        matrix[row][col].w = sourceN + 1 - matrix[row][col].m;
+
+                        if (col == n - 1)
                         {
-                            col++;
-                        }
-                        else if (col == orignalN - 2)
-                        {
-                            col = 0;
                             row++;
                         }
+                        col = (col + 1) % n;
                     }
                 }
             }
+
             convertToGeneral();
             numberOfStableMatchings();
-            specialMatrixFile << "Number of SM is " << cnt << '\n';
+            outputFile << "Number of SM is " << cnt << '\n';
+
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
-                    specialMatrixFile << matrix[i][j].m + 1 << ' ' << matrix[i][j].w + 1 << "  ";
+                    outputFile << matrix[i][j].m + 1 << ' ' << matrix[i][j].w + 1 << "  ";
                 }
-                specialMatrixFile << '\n';
+                outputFile << '\n';
             }
-            if (cnt > max)
+            outputFile << '\n';
+
+            if (cnt > maxSM)
             {
-                max = cnt;
+                maxSM = cnt;
             }
-            updateDisplayArray(badRow, badCol);
-            if (badRow == orignalN - 1 && badCol == orignalN - 1)
-            {
-                lastIteraation++;
-            }
-            else if (badRow < orignalN - 1)
-            {
-                badRow++;
-            }
-            else if (badRow == orignalN - 1)
-            {
-                badCol++;
-                badRow = 0;
-            }
-        } while ((badRow != orignalN || badCol != orignalN) && lastIteraation != 1);
-        count++;
-        specialMatrixFile << "Count is " << count << '\n';
-        for (int i = 0; i < n + 1; i++)
-        {
-            for (int j = 0; j < n + 1; j++)
-            {
-                specialMatrixFile << startNArray[i][j] + 1 << " ";
-            }
-            specialMatrixFile << '\n';
         }
-        for (int i = 0; i < n + 1; i++)
-        {
-            for (int j = 0; j < n + 1; j++)
-            {
-                specialMatrixFile << displayArr[i][j] << "   ";
-            }
-            specialMatrixFile << '\n';
-        }
-        std::cout << "count is " << count << '\n';
     }
-    specialMatrixFile.close();
-    FileToRead.close();
-    std::cout << '\n' << "max is " << max << '\n';
-    std::cout << "count is " << count << '\n';
+    
+
+    outputFile.close();
+    inputFile.close();
+    std::cout << '\n' << "Max SM is " << maxSM << '\n';
 }
 
 void optionR() {
     clearScreen();
     std::cout << "--- Matrix Reduction ---\n\n";
+    std::cout << "Target Size (n): " << n << "\n";
+    std::cout << "Source Size: " << n + 1 << "\n\n";
 
-    int startingN;
-    std::cout << "Enter the n you would like to start with: ";
-    std::cin >> startingN;
-    
-    std::cout << "\nReducing matrix to n - 1...\n";
-    dropToOneLessN(startingN);
+    std::string inputFilename, outputFilename;
 
-    std::cout << "\nMatrix reduction complete\n";
+    // Clear the input buffer of any leftover newline characters from main menu selection
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    std::cout << "Enter input filename (default: input.txt): ";
+    std::getline(std::cin, inputFilename);
+    if (inputFilename.empty()) {
+        inputFilename = "input.txt";
+    } else if (std::filesystem::path(inputFilename).extension() != ".txt") {
+        inputFilename += ".txt";
+    }
+
+    std::cout << "Enter output filename (default: output.txt): ";
+    std::getline(std::cin, outputFilename);
+    if (outputFilename.empty()) {
+        outputFilename = "output.txt";
+    } else if (std::filesystem::path(outputFilename).extension() != ".txt") {
+        outputFilename += ".txt";
+    }
+
+    std::cout << "\nReducing matrix from " << n + 1 << " to " << n << "...\n";
+    dropToOneLessN(inputFilename, outputFilename);
+
+    std::cout << "\nMatrix reduction complete\n\n";
 }

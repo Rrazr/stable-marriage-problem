@@ -16,3 +16,9 @@ build/
 .vscode/
 bin/
 obj/
+
+# Ignore contents of inputs and outputs but keep the folders
+inputs/*
+!inputs/.gitkeep
+outputs/*
+!outputs/.gitkeep

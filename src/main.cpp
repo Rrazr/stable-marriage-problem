@@ -35,21 +35,27 @@ int main() {
         if (ch == 'Q' || ch == 'q') {
             std::cout << "Exiting program...\n";
             break;
-        } else if (ch == 'S' || ch == 's') {
+        }
+        else if (ch == 'S' || ch == 's') {
             optionS();
-        } else if (ch == 'G' || ch == 'g'){
+        } 
+        else if (ch == 'G' || ch == 'g'){
             optionG();
             waitForEnter();
-        }else if (ch == 'L' || ch == 'l'){
+        }
+        else if (ch == 'L' || ch == 'l'){
             optionL();
             waitForEnter();
-        }else if (ch == 'H' || ch == 'h'){
+        }
+        else if (ch == 'H' || ch == 'h'){
             optionH();
             waitForEnter();
-        }else if (ch == 'R' || ch == 'r'){
+        }
+        else if (ch == 'R' || ch == 'r'){
             optionR();
             waitForEnter();
-        }else if (ch == 'E' || ch == 'e'){
+        }
+        else if (ch == 'E' || ch == 'e'){
             optionE();
             waitForEnter();
         }
