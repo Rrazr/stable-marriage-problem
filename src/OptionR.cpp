@@ -10,7 +10,7 @@
 #include <ios>
 #include <limits>
 
-void dropToOneLessN(const std::string& inputFilename, const std::string& outputFilename){
+void dropToOneLessN(const std::string& inputFilename, const std::string& outputFilename, bool printSMCount){
     // sourceN is the size of the matrix we are reading (one larger than current system n)
     int sourceN = n + 1;
 
@@ -76,7 +76,9 @@ void dropToOneLessN(const std::string& inputFilename, const std::string& outputF
 
             convertToGeneral();
             numberOfStableMatchings();
-            outputFile << "Number of SM is " << cnt << '\n';
+            if (printSMCount) {
+                outputFile << "Number of SM is " << cnt << '\n';
+            }
 
             for (int i = 0; i < n; i++)
             {
@@ -128,8 +130,13 @@ void optionR() {
         outputFilename += ".txt";
     }
 
+    std::string smChoice;
+    std::cout << "Print SM count for each matrix? (Y/N, default: N): ";
+    std::getline(std::cin, smChoice);
+    bool printSMCount = (smChoice == "Y" || smChoice == "y");
+
     std::cout << "\nReducing matrix from " << n + 1 << " to " << n << "...\n";
-    dropToOneLessN(inputFilename, outputFilename);
+    dropToOneLessN(inputFilename, outputFilename, printSMCount);
 
     std::cout << "\nMatrix reduction complete\n\n";
 }
