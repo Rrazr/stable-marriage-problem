@@ -253,52 +253,6 @@ bool repeatedOnes(int j){
     return true;
 }
 
-void noSoulmatesRandomizer(){
-    clearRankings();
-    int ind = 0;
-    for (int i = 0; i < n; i ++){
-        ind = std::rand() % n;
-        if (i == n - 1){
-            while (repeatedOnes(ind)){
-                ind = std::rand() % n;
-            }
-        }
-        matrix[i][ind].m = 0;
-    }
-    for (int i = 0; i < n; i ++){
-        for (int k = 0; k < n; k ++){
-            mRank.push_back(k + 1);
-        }
-        mRank.erase(mRank.begin() + (n - 1));
-        for (int j = 0; j < n; j ++){
-            if (matrix[i][j].m == -1){
-                ind = std::rand() % mRank.size();
-                matrix[i][j].m = mRank[ind];
-                mRank.erase(mRank.begin() + ind);
-            }
-        }
-    }
-    for (int i = 0; i < n; i ++){
-        do{
-            ind = std::rand() % n;
-        }while(matrix[ind][i].m == 0);
-        matrix[ind][i].w = 0;
-    }
-    for (int i = 0; i < n; i ++){
-        for (int k = 0; k < n; k ++){
-            wRank.push_back(k + 1);
-        }
-        wRank.erase(wRank.begin() + (n - 1));
-        for (int j = 0; j < n; j ++){
-            if (matrix[j][i].w == -1){
-                ind = std::rand() % wRank.size();
-                matrix[j][i].w = wRank[ind];
-                wRank.erase(wRank.begin() + ind);
-            }
-        }
-    }
-}
-
 void randomizer(){
     clearRankings();
     int ind;
@@ -353,6 +307,5 @@ void clearScreen() {
 
 void waitForEnter() {
     std::cout << "\nPress Enter to continue...";
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cin.get();
 }

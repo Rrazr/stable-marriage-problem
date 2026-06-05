@@ -20,4 +20,3 @@ double mean = 0.0;
 std::vector<int> mRank;
 std::vector<int> wRank;
 char ch;
-bool Pseudo = false;

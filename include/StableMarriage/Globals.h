@@ -31,7 +31,6 @@ extern double mean;
 extern std::vector<int> mRank;
 extern std::vector<int> wRank;
 extern char ch;
-extern bool Pseudo;
 
 // System initialization and resizing
 void initializeSystem(int newN);
