@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Project Name
-project(StableMarriageSolver CXX)
+project(StableMarriageProblemTool CXX)
 
 # Enforce C++17 Standard
 set(CMAKE_CXX_STANDARD 17)

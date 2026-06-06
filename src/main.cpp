@@ -19,7 +19,7 @@ int main() {
     while(1) {
         clearScreen();
         std::cout << "Choose an option below:\n\n";
-        std::cout << "(G) Generate And Calculate Random Samples\n";
+        std::cout << "(G) Generate and Calculate Random Samples\n";
         std::cout << "(C) Calculate SM for Matrices\n";
         std::cout << "(H) Hill Climbing Search\n";
         std::cout << "(R) Matrix Reduction\n\n";

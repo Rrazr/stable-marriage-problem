@@ -12,7 +12,7 @@ void optionC(){
     clearScreen();
     std::cout << "--- Calculate Stable Marriages for Matrices ---\n\n";
 
-    std::cout << "(A) Normal matrices\n";
+    std::cout << "(A) Standard matrices\n";
     std::cout << "(B) Latin matrices\n\n";
     std::cout << "Enter choice: ";
     

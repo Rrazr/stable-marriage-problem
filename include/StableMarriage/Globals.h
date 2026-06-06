@@ -10,7 +10,6 @@ struct PAIR {
 
 // Global Configuration (Adjustable)
 extern int n;
-extern int MAX_SM;
 extern int histogramSize;
 
 // Shared Global Variables (Dynamic Vectors)

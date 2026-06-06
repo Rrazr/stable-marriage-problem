@@ -1,7 +1,6 @@
 #include <StableMarriage/Globals.h>
 
 int n = 7;
-int MAX_SM = 1231;
 int histogramSize = 100000;
 
 std::vector<std::vector<PAIR>> matrix;

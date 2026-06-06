@@ -9,8 +9,7 @@ void optionS() {
     while (true) {
         clearScreen();
         std::cout << "--- Settings ---\n\n";
-        std::cout << "(1) Change matrix size (n)\n";
-        std::cout << "(2) Change MAX_SM\n\n";
+        std::cout << "(1) Change matrix size (n)\n\n";
         std::cout << "(B) Back to Main Menu\n\n";
         std::cout << "Enter choice: ";
         std::cin >> settingChoice;
@@ -26,18 +25,6 @@ void optionS() {
             std::cin >> newN;
             initializeSystem(newN);
             std::cout << "\nSystem initialized with n = " << n << "\n\n";
-
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            waitForEnter();
-        }
-        else if (settingChoice == '2') {
-            clearScreen();
-            std::cout << "--- Change MAX_SM ---\n\n";
-            int newMax;
-            std::cout << "Current MAX_SM = " << MAX_SM << "\nEnter new MAX_SM: ";
-            std::cin >> newMax;
-            MAX_SM = newMax;
-            std::cout << "\nMAX_SM updated to " << MAX_SM << "\n\n";
 
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             waitForEnter();
