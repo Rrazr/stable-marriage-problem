@@ -38,6 +38,9 @@ void optionL(){
         }
         auto start = std::chrono::high_resolution_clock::now();
         numberOfStableMatchings();
+        if (cnt > largest) {
+            largest = cnt;
+        }
         auto stop = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
          

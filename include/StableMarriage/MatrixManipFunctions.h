@@ -3,6 +3,9 @@
 
 #include <StableMarriage/Globals.h>
 
+#include <filesystem>
+
+void getIOFilePaths(std::filesystem::path& inputPath, std::filesystem::path& outputPath);
 void printHistogram(int numSamples);
 void printMatrix();
 int findIndex(int temp[], int size, int num);

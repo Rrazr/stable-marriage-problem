@@ -6,15 +6,29 @@
 #include <iostream>
 #include <fstream>
 #include <limits>
+#include <string>
+#include <filesystem>
+
+inline void updateLargestIfBetter() {
+    if (cnt > largest) {
+        largest = cnt;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                largestMatrix[i][j].m = matrix[i][j].m;
+                largestMatrix[i][j].w = matrix[i][j].w;
+            }
+        }
+    }
+}
 
 void hillClimb() {
     largest = 0;
     numberOfStableMatchings();
-    localMax = largest;
+    localMax = cnt;
     for (int i = 0; i < n; i ++){
         for (int j = 0; j < n; j ++){
-            localMaxMatrix[i][j].m = largestMatrix[i][j].m;
-            localMaxMatrix[i][j].w = largestMatrix[i][j].w;
+            localMaxMatrix[i][j].m = matrix[i][j].m;
+            localMaxMatrix[i][j].w = matrix[i][j].w;
         }
     }
     while (1) {
@@ -24,6 +38,7 @@ void hillClimb() {
                 for (int k = j + 1; k < n; k ++){
                     swapMen(i, j, k);
                     numberOfStableMatchings();
+                    updateLargestIfBetter();
                     swapMen(i, j, k);
                 }
             }
@@ -33,6 +48,7 @@ void hillClimb() {
                 for (int k = j + 1; k < n; k ++){
                     swapWomen(i, j, k);
                     numberOfStableMatchings();
+                    updateLargestIfBetter();
                     swapWomen(i, j, k);
                 }
             }
@@ -59,103 +75,100 @@ void optionH(){
     clearHistogram();
     std::cout << "--- Hill Climbing Search ---\n\n";
 
-    bool notFromFile = false;
     std::cout << "(A) Randomized matrix\n";
-    std::cout << "(B) Input normal matrix\n";
-    std::cout << "(C) Input Latin matrix\n";
-    std::cout << "(D) Input File\n\n";
+    std::cout << "(B) Standard matrices\n";
+    std::cout << "(C) Latin matrices\n\n";
     std::cout << "Enter choice: ";
     std::cin >> ch;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cout << '\n';
 
     if (ch == 'A' || ch == 'a'){
         randomizer();
-        notFromFile = true;
-    }
-    else if (ch == 'B' || ch == 'b'){
-        int m, w;
-        for (int i = 0; i < n; i ++){
-            std::cout << "Enter Row " << i + 1 << ": ";
-            for (int j = 0; j < n; j ++){
-                std::cin >> m >> w;
-                matrix[i][j].m = m - 1;
-                matrix[i][j].w = w - 1;
-            }
-        }
-        std::cout << "This is the given matrix:\n";
-        for (int i = 0; i < n; i ++){
-            for (int j = 0; j < n; j ++){
-                std::cout << matrix[i][j].m + 1 << ',' << matrix[i][j].w + 1 << "  ";
-            }
-            std::cout << '\n';
-        }
-        notFromFile = true;
-    }
-    else if (ch == 'C' || ch == 'c'){
-        int num;
-        for (int i = 0; i < n; i ++){
-            std::cout << "Enter Row " << i + 1 << ": ";
-            for(int j = 0; j < n; j++){
-                std::cin >> num;
-                matrix[i][j].m = num - 1;
-                matrix[i][j].w = n - num;
-            }
-        }
-        std::cout << "This is the given matrix:\n";
-        for (int i = 0; i < n; i ++){
-            for (int j = 0; j < n; j ++){
-                std::cout << matrix[i][j].m + 1 << ',' << matrix[i][j].w + 1 << "  ";
-            }
-            std::cout << '\n';
-        }
-        notFromFile = true;
-    }
-
-    if (notFromFile){
         hillClimb();
         std::cout << "\nLocal Max: " << localMax << '\n';
-    }else if (ch == 'D' || ch == 'd'){
-        std::string randy;
+    }
+    else if (ch == 'B' || ch == 'b' || ch == 'C' || ch == 'c') {
+        std::filesystem::path inputPath, outputPath;
+        getIOFilePaths(inputPath, outputPath);
+
+        std::ifstream inputFile(inputPath);
+        if (!inputFile) {
+            std::cout << "\n[ERROR] Could not open input file: " << inputPath.string() << "\n";
+            std::cout << "Please ensure the file is located in the 'inputs' folder.\n";
+            return;
+        }
+
+        std::ofstream outputFile(outputPath);
+        if (!outputFile) {
+            std::cout << "\n[ERROR] Could not create output file: " << outputPath.string() << "\n";
+            return;
+        }
+
+        std::cout << "\n";
+
         int counter = 0;
-        int randyInt;
-        int seedSM;
-        std::ofstream outputFile;
-        outputFile.open("/Users/ryan/Desktop/6CrossTo7AllMatricesAfterHC.txt", std::ios::app);
-        std::string fileName;
-        std::cout << "Enter file name: ";
-        std::cin >> fileName;
-        std::ifstream inputFile("/Users/ryan/Desktop/" + fileName);
-        while(inputFile >> randy){
+        if (ch == 'B' || ch == 'b') {
             int m, w;
-            for (int i = 0; i < 3; i ++){
-                inputFile >> randy;
-            }
-            inputFile >> randyInt;
-            for (int i = 0; i < n; i ++){
-                for (int j = 0; j < n; j ++){
-                    inputFile >> m >> w;
-                    matrix[i][j].m = m - 1;
-                    matrix[i][j].w = w - 1;
+            while (inputFile >> m >> w) {
+                matrix[0][0].m = m - 1;
+                matrix[0][0].w = w - 1;
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n; j++) {
+                        if (i == 0 && j == 0) continue;
+                        inputFile >> m >> w;
+                        matrix[i][j].m = m - 1;
+                        matrix[i][j].w = w - 1;
+                    }
                 }
-            }
-            hillClimb();
-            seedSM = localMax;
-            outputFile << "Seed: " << seedSM << '\n';
-            outputFile << "Number of Stable Marriages: " << localMax << '\n';
-            for (int i = 0; i < n; i ++){
-                for (int j = 0; j < n; j ++){
-                    outputFile << localMaxMatrix[i][j].m + 1 << ' ' << localMaxMatrix[i][j].w + 1 << "  ";
+                hillClimb();
+                outputFile << "Number of Stable Marriages: " << localMax << '\n';
+                for (int i = 0; i < n; i ++){
+                    for (int j = 0; j < n; j ++){
+                        outputFile << localMaxMatrix[i][j].m + 1 << ' ' << localMaxMatrix[i][j].w + 1 << "  ";
+                    }
+                    outputFile << '\n';
                 }
                 outputFile << '\n';
+                histogram[localMax]++;
+                mean += localMax;
+                counter++;
+                std::cout << "Hill-climbed matrix " << counter << " (Local Max: " << localMax << ")\n\n";
             }
-            histogram[localMax]++;
-            mean += localMax;
-            counter ++;
-            std::cout << "Counter: " << counter << '\n';
         }
+        else {
+            int latinVal;
+            while (inputFile >> latinVal) {
+                matrix[0][0].m = latinVal - 1;
+                matrix[0][0].w = n - latinVal;
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n; j++) {
+                        if (i == 0 && j == 0) continue;
+                        inputFile >> latinVal;
+                        matrix[i][j].m = latinVal - 1;
+                        matrix[i][j].w = n - latinVal;
+                    }
+                }
+                convertToGeneral();
+                hillClimb();
+                outputFile << "Number of Stable Marriages: " << localMax << '\n';
+                for (int i = 0; i < n; i ++){
+                    for (int j = 0; j < n; j ++){
+                        outputFile << localMaxMatrix[i][j].m + 1 << ' ' << localMaxMatrix[i][j].w + 1 << "  ";
+                    }
+                    outputFile << '\n';
+                }
+                outputFile << '\n';
+                histogram[localMax]++;
+                mean += localMax;
+                counter++;
+                std::cout << "Hill-climbed matrix " << counter << " (Local Max: " << localMax << ")\n";
+            }
+        }
+
+        std::cout << "\nHill-climbed " << counter << " matrices\n";
+        printHistogram(counter);
         inputFile.close();
         outputFile.close();
     }
-
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

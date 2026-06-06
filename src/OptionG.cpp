@@ -20,6 +20,8 @@ void optionG() {
     for (int i = 0; i < numSamples; i ++){
         randomizer();
         numberOfStableMatchings();
+        histogram[cnt]++;
+        mean += cnt;
     }
     std::cout << "\nHistogram:\n";
     printHistogram(numSamples);

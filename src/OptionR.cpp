@@ -10,16 +10,9 @@
 #include <ios>
 #include <limits>
 
-void dropToOneLessN(const std::string& inputFilename, const std::string& outputFilename, bool printSMCount){
+void dropToOneLessN(const std::filesystem::path& inputPath, const std::filesystem::path& outputPath, bool printSMCount){
     // sourceN is the size of the matrix we are reading (one larger than current system n)
     int sourceN = n + 1;
-
-    // Construct cross-platform paths
-    std::filesystem::path inputPath = std::filesystem::path("inputs") / inputFilename;
-    std::filesystem::path outputPath = std::filesystem::path("outputs") / outputFilename;
-
-    // Ensure outputs directory exists
-    std::filesystem::create_directories("outputs");
 
     std::ifstream inputFile(inputPath);
     if (!inputFile) {
@@ -109,26 +102,11 @@ void optionR() {
     std::cout << "Target Size (n): " << n << "\n";
     std::cout << "Source Size: " << n + 1 << "\n\n";
 
-    std::string inputFilename, outputFilename;
-
     // Clear the input buffer of any leftover newline characters from main menu selection
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    std::cout << "Enter input filename (default: input.txt): ";
-    std::getline(std::cin, inputFilename);
-    if (inputFilename.empty()) {
-        inputFilename = "input.txt";
-    } else if (std::filesystem::path(inputFilename).extension() != ".txt") {
-        inputFilename += ".txt";
-    }
-
-    std::cout << "Enter output filename (default: output.txt): ";
-    std::getline(std::cin, outputFilename);
-    if (outputFilename.empty()) {
-        outputFilename = "output.txt";
-    } else if (std::filesystem::path(outputFilename).extension() != ".txt") {
-        outputFilename += ".txt";
-    }
+    std::filesystem::path inputPath, outputPath;
+    getIOFilePaths(inputPath, outputPath);
 
     std::string smChoice;
     std::cout << "Print SM count for each matrix? (Y/N, default: N): ";
@@ -136,7 +114,7 @@ void optionR() {
     bool printSMCount = (smChoice == "Y" || smChoice == "y");
 
     std::cout << "\nReducing matrix from " << n + 1 << " to " << n << "...\n";
-    dropToOneLessN(inputFilename, outputFilename, printSMCount);
+    dropToOneLessN(inputPath, outputPath, printSMCount);
 
     std::cout << "\nMatrix reduction complete\n\n";
 }

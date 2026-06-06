@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <chrono>
+#include <filesystem>
 
 void initializeSystem(int newN) {
     n = newN;
@@ -49,18 +50,6 @@ bool ok2(const std::vector<int>& q, int col) {
 void backtrack(int &col) {
     col--;
     if(col==-1){
-        //std::cout << "Number of Stable Marriages: " << cnt << '\n';
-        mean += cnt;
-        histogram[cnt] ++;
-        if (cnt > largest){
-            for (int i = 0; i < n; i ++){
-                for (int j = 0; j < n; j ++){
-                    largestMatrix[i][j].m = matrix[i][j].m;
-                    largestMatrix[i][j].w = matrix[i][j].w;
-                }
-            }
-        }
-        largest = cnt > largest ? cnt : largest;
         iterationKiller = false;
     }
 }
@@ -308,4 +297,29 @@ void clearScreen() {
 void waitForEnter() {
     std::cout << "\nPress Enter to continue...";
     std::cin.get();
+}
+
+void getIOFilePaths(std::filesystem::path& inputPath, std::filesystem::path& outputPath) {
+    std::string inputFilename, outputFilename;
+
+    std::cout << "Enter input filename (default: input.txt): ";
+    std::getline(std::cin, inputFilename);
+    if (inputFilename.empty()) {
+        inputFilename = "input.txt";
+    } else if (std::filesystem::path(inputFilename).extension() != ".txt") {
+        inputFilename += ".txt";
+    }
+
+    std::cout << "Enter output filename (default: output.txt): ";
+    std::getline(std::cin, outputFilename);
+    if (outputFilename.empty()) {
+        outputFilename = "output.txt";
+    } else if (std::filesystem::path(outputFilename).extension() != ".txt") {
+        outputFilename += ".txt";
+    }
+
+    inputPath = std::filesystem::path("inputs") / inputFilename;
+    outputPath = std::filesystem::path("outputs") / outputFilename;
+
+    std::filesystem::create_directories("outputs");
 }
