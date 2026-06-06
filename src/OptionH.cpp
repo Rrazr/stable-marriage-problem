@@ -86,7 +86,7 @@ void optionH(){
     if (ch == 'A' || ch == 'a'){
         randomizer();
         hillClimb();
-        std::cout << "\nLocal Max: " << localMax << '\n';
+        std::cout << "\nLocal Max: " << localMax << "\n\n";
     }
     else if (ch == 'B' || ch == 'b' || ch == 'C' || ch == 'c') {
         std::filesystem::path inputPath, outputPath;
@@ -168,6 +168,8 @@ void optionH(){
 
         std::cout << "\nHill-climbed " << counter << " matrices\n";
         printHistogram(counter);
+        std::cout << "\n";
+
         inputFile.close();
         outputFile.close();
     }

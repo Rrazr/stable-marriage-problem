@@ -23,7 +23,7 @@ void optionG() {
         histogram[cnt]++;
         mean += cnt;
     }
-    std::cout << "\nHistogram:\n";
+    std::cout << "\nGenerated and processed " << numSamples << " random samples\n";
     printHistogram(numSamples);
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);

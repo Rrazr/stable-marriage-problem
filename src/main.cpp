@@ -1,5 +1,5 @@
 #include <StableMarriage/Globals.h>
-#include <StableMarriage/OptionL.h>
+#include <StableMarriage/OptionC.h>
 #include <StableMarriage/OptionH.h>
 #include <StableMarriage/OptionG.h>
 #include <StableMarriage/OptionR.h>
@@ -20,7 +20,7 @@ int main() {
         clearScreen();
         std::cout << "Choose an option below:\n\n";
         std::cout << "(G) Generate And Calculate Random Samples\n";
-        std::cout << "(L) Test Latin Matrix\n";
+        std::cout << "(C) Calculate SM for Matrices\n";
         std::cout << "(H) Hill Climbing Search\n";
         std::cout << "(R) Matrix Reduction\n\n";
         std::cout << "(S) Settings\n";
@@ -41,8 +41,8 @@ int main() {
             optionG();
             waitForEnter();
         }
-        else if (ch == 'L' || ch == 'l'){
-            optionL();
+        else if (ch == 'C' || ch == 'c'){
+            optionC();
             waitForEnter();
         }
         else if (ch == 'H' || ch == 'h'){
